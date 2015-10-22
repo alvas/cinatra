@@ -24,7 +24,7 @@ namespace cinatra
 		{
 			std::string funcName = getFuncName(name);
 
-			register_nonmenber_impl<Function>(funcName, f); //对函数指针有效.
+			register_nonmember_impl<Function>(funcName, f); //对函数指针有效.
 		}
 
 		std::string getFuncName(std::string name)
@@ -156,7 +156,7 @@ namespace cinatra
 
 	public:
 		template<class Signature, typename Function>
-		void register_nonmenber_impl(const std::string& name, const Function& f)
+		void register_nonmember_impl(const std::string& name, const Function& f)
 		{
 			// instantiate and store the invoker by name
 			this->map_invokers.emplace(name, std::bind(&invoker<Function, Signature>::template call<std::tuple<>>, f, std::placeholders::_1,
