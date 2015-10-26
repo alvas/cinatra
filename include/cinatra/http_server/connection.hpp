@@ -144,7 +144,7 @@ namespace cinatra
 			bool has_error = check_request(parser, req, res);
 			add_version(parser, req, res);
 			add_keepalive(parser, req, res);
-			add_conten_type(res);
+			add_content_type(res);
 
 			return !has_error;
 		}
@@ -286,7 +286,7 @@ namespace cinatra
 			}
 		}
 
-		void add_conten_type(Response& res)
+		void add_content_type(Response& res)
 		{
 			if (res.header.get_count("Content-Type") == 0)
 			{
@@ -393,7 +393,7 @@ namespace cinatra
 					}
 
 					Request req = parser.get_request();
-					LOG_DBG << "New request,path:" << req.path();
+					LOG_DBG << "New request, path:" << req.path();
 					Response res;
 
 					if (init_req_res(req, res, parser, yield))

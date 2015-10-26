@@ -181,9 +181,9 @@ namespace cinatra
 		AOP<Aspect...> aop_;
 
 #ifndef CINATRA_SINGLE_THREAD
-		int num_threads_ = 1;
-#else
 		int num_threads_ = std::thread::hardware_concurrency();
+#else
+		int num_threads_ = 1;
 #endif // CINATRA_SINGLE_THREAD
 
 		struct HttpListenInfo
