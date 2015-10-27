@@ -489,3 +489,23 @@ namespace cinatra
 				catch (...)
 				{
 					response_error(HttpError(500), req, res, yield);
+					if (shutdown(socket_, yield))
+					{
+						close();
+						return;
+					}
+				}
+			}
+		}
+	private:
+		boost::asio::io_service& service_;
+		SocketT socket_;
+		boost::asio::streambuf req_buf_;
+
+		boost::asio::deadline_timer timer_;	// 长连接超时使用的timer.
+		const error_handler_t& error_handler_;
+		const std::string& static_dir_;
+		const request_handler_t& request_handler_;
+
+	};
+}
